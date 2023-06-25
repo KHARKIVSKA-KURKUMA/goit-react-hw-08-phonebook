@@ -1,23 +1,44 @@
 import { ToastContainer } from 'react-toastify';
-import { Title, Container, Wrap, SubTitle } from './App.styled';
-import ContactForm from '../ContactForm';
-import ContactList from '../ContactList';
-import Filter from 'components/Filter/Filter';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import Layout from 'components/Layout/Layout';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentUser } from 'store/auth/authThunks';
+import { lazy, useEffect } from 'react';
+import Restricted from 'components/Routes/Restricted';
+import Private from 'components/Routes/Private';
+/* -------------------------------------------------------------------------- */
+const SignInPage = lazy(() => import('../../pages/SignIn-page/SignInPage'));
+const SignUpPage = lazy(() => import('pages/SignUp-page/SignUpPage'));
+const ContactsPage = lazy(() => import('pages/Contacts-page/ContactsPage'));
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <Container>
+    <>
       <ToastContainer autoClose={1500} theme="colored" />
-      <Wrap>
-        <Title>Phonebook</Title>
-        <ContactForm />
-      </Wrap>
-      <Wrap>
-        <SubTitle>Contacts</SubTitle>
-        <Filter />
-        <ContactList></ContactList>
-      </Wrap>
-    </Container>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/login" />} />
+          <Route
+            path="login"
+            element={<Restricted component={SignInPage} to="/contacts" />}
+          />
+          <Route
+            path="register"
+            element={<Restricted component={SignUpPage} to="/contacts" />}
+          />
+          <Route
+            path="contacts"
+            element={<Private component={ContactsPage} to="/login" />}
+          />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
   );
 };
 export default App;

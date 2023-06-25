@@ -28,14 +28,17 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background-color: #3acc00;
-  color: #fff;
+  font-family: 'Lexend Peta', sans-serif;
+  background-color: #fdc886;
+  color: #000000;
   padding: 10px;
   font-size: 16px;
+
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
+  transition: background-color 300ms linear;
   &:hover {
-    background-color: #0066b2;
+    background-color: #cfd382;
   }
 `;
 

@@ -19,7 +19,7 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 600px;
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
@@ -39,29 +39,36 @@ const Container = styled.div`
 
 const Name = styled.p`
   font-weight: bold;
+  font-family: 'Lexend Peta', sans-serif;
   margin-right: 10px;
 `;
 
 const Number = styled.p`
   font-size: 14px;
+  font-family: 'Lexend Peta', sans-serif;
   color: gray;
 `;
 
 const DeleteButton = styled.button`
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 10px;
-  width: 65px;
-`;
-const EditButton = styled.button`
-  background-color: #e5ff00;
+  background-color: #f75252;
   color: #000000;
   border: none;
-  border-radius: 4px;
+  font-family: 'Lexend Peta', sans-serif;
+  border-radius: 10px;
   padding: 6px 10px;
-  width: 65px;
+  font-size: 14px;
+  width: 85px;
+`;
+const EditButton = styled.button`
+  background-color: #eefc73;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+
+  font-family: 'Lexend Peta', sans-serif;
+  width: 85px;
 `;
 const BtnWrap = styled.div`
   display: flex;

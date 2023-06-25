@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-axios.defaults.baseURL = 'https://64958045b08e17c917923130.mockapi.io';
+import { token } from 'store/auth/authThunks';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
@@ -38,12 +37,12 @@ export const deleteContactsThunk = createAsyncThunk(
 );
 export const putContactsThunk = createAsyncThunk(
   'contacts/editContact',
-  async (newContact, { rejectWithValue }) => {
+  async ({ id, name, number }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.put(
-        `/contacts/${newContact.id}`,
-        newContact
-      );
+      const { data } = await axios.patch(`/contacts/${id}`, {
+        name,
+        number,
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

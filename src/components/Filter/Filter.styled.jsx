@@ -4,7 +4,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  max-width: 500px;
+  max-width: 600px;
   flex-direction: column;
 `;
 
@@ -13,6 +13,7 @@ const TextFilter = styled.p`
   font-size: 16px;
   font-weight: 500;
   margin: 0 0 5px 0;
+  font-family: 'Lexend Peta', sans-serif;
   text-transform: uppercase;
 `;
 
