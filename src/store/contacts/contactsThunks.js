@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { token } from 'store/auth/authThunks';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
