@@ -7,7 +7,7 @@ import { getContactsThunk } from 'store/contacts/contactsThunks';
 
 const ContactList = () => {
   const { contacts } = useSelector(contactSelector);
-  const { filter } = useSelector(filterSelector);
+  const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
   /* -------------------------------------------------------------------------- */
   useEffect(() => {

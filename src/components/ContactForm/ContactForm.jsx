@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Input, Form, Label, Button } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactSelector } from 'store/selectors';
@@ -13,8 +13,6 @@ function ContactForm() {
   const [number, setNumber] = useState('');
   const nameRegex =
     /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-  const numberRegex =
-    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
   /* ---------------------------------- CLEAN --------------------------------- */
   const cleanField = () => {
     setName('');
@@ -30,9 +28,6 @@ function ContactForm() {
       toast.error(
         `${name} is invalid name! Add at least 3 letters without numbers`
       );
-      return;
-    } else if (!numberRegex.test(number)) {
-      toast.error(`${number} is invalid number`);
       return;
     } else {
       const newContact = {
@@ -52,7 +47,7 @@ function ContactForm() {
         <Input
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="/^([A-Za-z\-\']{1,50})|([А-Яа-я\-\']{1,50})$/"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           value={name}
           onChange={e => setName(e.currentTarget.value)}
@@ -64,7 +59,7 @@ function ContactForm() {
         <Input
           type="tel"
           name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           value={number}
           onChange={e => setNumber(e.currentTarget.value)}

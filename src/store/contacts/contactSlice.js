@@ -7,12 +7,8 @@ import {
   putContactsThunk,
 } from './contactsThunks';
 import {
-  handleDeleteFulfilled,
-  handleEditFulfilled,
   handleFulfilled,
-  handleGetFulfilled,
   handlePending,
-  handlePostFulfilled,
   handleRejected,
 } from './handleFunctions';
 
@@ -21,10 +17,24 @@ const contactSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(getContactsThunk.fulfilled, handleGetFulfilled)
-      .addCase(postContactsThunk.fulfilled, handlePostFulfilled)
-      .addCase(putContactsThunk.fulfilled, handleEditFulfilled)
-      .addCase(deleteContactsThunk.fulfilled, handleDeleteFulfilled)
+      .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
+        state.contacts = payload;
+      })
+      .addCase(postContactsThunk.fulfilled, (state, { payload }) => {
+        state.contacts = [payload, ...state.contacts];
+      })
+      .addCase(putContactsThunk.fulfilled, (state, { payload }) => {
+        const index = state.contacts.findIndex(
+          contact => contact.id === payload.id
+        );
+        state.contacts.splice(index, 1, payload);
+      })
+      .addCase(deleteContactsThunk.fulfilled, (state, { payload }) => {
+        const index = state.contacts.findIndex(
+          contact => contact.id === payload.id
+        );
+        state.contacts.splice(index, 1);
+      })
       .addMatcher(
         isAnyOf(
           getContactsThunk.pending,
